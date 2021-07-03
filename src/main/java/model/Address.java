@@ -3,6 +3,7 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Embeddable
 public class Address {
@@ -26,4 +27,18 @@ public class Address {
         this.zipcode = zipcode;
         this.city = city;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return street.equals(address.street) && zipcode.equals(address.zipcode) && city.equals(address.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street, zipcode, city);
+    }
+
 }
